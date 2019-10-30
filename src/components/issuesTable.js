@@ -46,7 +46,12 @@ class IssuesTable extends React.Component {
     render() {
         const { isOpen } = this.state;
 
-        const sortedTableData = [...this.state.tableData];
+        const sortedTableData = this.state.tableData.map(issue => {
+            return {
+                id: issue.id,
+                content: issue
+            }
+        });
 
         if (this.props.sortingBy && this.props.sortingBy.length) {
             sortedTableData.sort( (a, b) => sortingFunc(a, b, this.props.sortingBy, 0))
@@ -111,7 +116,7 @@ class IssuesTable extends React.Component {
                                 Container: ({ children }) => (
                                     <Form onSubmit={this.onFormSubmit}>
                                         {({ formProps }) =>( 
-                                            <form {...formProps}>
+                                            <form className="form" {...formProps}>
                                                 {children}
                                             </form>
                                         )}

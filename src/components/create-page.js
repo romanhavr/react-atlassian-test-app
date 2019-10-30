@@ -13,7 +13,7 @@ function CreatePage(props) {
 
     const onFormSubmit = (data) => {
         if (!data.assignee) return
-        props.addIssue(data, props.storeTableData.length);
+        props.addIssue(data);
         cancel();
     }
 
@@ -42,12 +42,6 @@ function CreatePage(props) {
     );
 }
 
-const mapStateToProps = (state) => {
-    return {
-        storeTableData: state.issues
-    }
-}
-
 const mapDispatchToProps = dispatch => {
     return {
         addIssue: (data, length) => dispatch(addIssue(data, length))
@@ -55,6 +49,6 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
 )(CreatePage);

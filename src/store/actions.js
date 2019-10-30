@@ -1,8 +1,8 @@
 import { ADD_ISSUE, EDIT_ISSUE, CHOOSE_ITEM, SORT_TABLE } from "./actionTypes";
 
-export const addIssue = (data, length) => ({
+export const addIssue = (data) => ({
   type: ADD_ISSUE,
-  payload: { data, length }
+  payload: { data }
 });
 
 export const editIssue = data => ({

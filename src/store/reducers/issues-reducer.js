@@ -11,28 +11,25 @@ export default function (state = initialState, action) {
   switch (action.type) {
 
     case ADD_ISSUE: {
-        const { data, length } = action.payload;
-        const newLabelIds = [];
-        Object.keys(data).forEach( key =>
-          labels.forEach(label => {
-            if (label.name === key && data[key].length)
-              newLabelIds.push(label.id)
-          })
-        );
-        const assigneeId = userList.find( user => 
-            user.displayName === data.assignee.value
-          ).id
+      const { data } = action.payload;
+      const newLabelIds = [];
+      Object.keys(data).forEach(key =>
+        labels.forEach(label => {
+          if (label.name === key && data[key].length)
+            newLabelIds.push(label.id)
+        })
+      );
+      const assigneeId = userList.find(user =>
+        user.displayName === data.assignee.value
+      ).id
       return [
-        ...state, 
+        ...state,
         {
-          id: length + 1,
-          content: {
-            id: length + 1,
-            issue: data.issue,
-            priority: data.priority,
-            assignee: assigneeId,
-            labelIds: newLabelIds
-          }
+          id: Date.now(),
+          issue: data.issue,
+          priority: data.priority,
+          assignee: assigneeId,
+          labelIds: newLabelIds
         }
       ];
     }
@@ -40,25 +37,22 @@ export default function (state = initialState, action) {
     case EDIT_ISSUE: {
       const { data } = action.payload;
       const newLabelIds = [];
-      Object.keys(data).forEach( key =>
+      Object.keys(data).forEach(key =>
         labels.forEach(label => {
           if (label.name === key && data[key].length)
             newLabelIds.push(label.id)
         })
       );
-      const assigneeId = userList.find( user => 
-          user.displayName === data.assignee.value
-        ).id;
+      const assigneeId = userList.find(user =>
+        user.displayName === data.assignee.value
+      ).id;
       const newIssues = [...state];
-      newIssues[data.id - 1] = {
+      newIssues[state.findIndex(issue => issue.id === data.id)] = {
         id: data.id,
-        content: {
-          id: data.id,
-          issue: data.issue,
-          priority: data.priority,
-          assignee: assigneeId,
-          labelIds: newLabelIds
-        }
+        issue: data.issue,
+        priority: data.priority,
+        assignee: assigneeId,
+        labelIds: newLabelIds
       }
       return newIssues
     }
