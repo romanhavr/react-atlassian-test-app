@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { addIssue } from '../store/actions';
-import { getTableData } from '../store/selectors';
 import Button from '@atlaskit/button';
 import CreateEditForm from './create-edit-form';
 import Form from '@atlaskit/form';
@@ -45,7 +44,7 @@ function CreatePage(props) {
 
 const mapStateToProps = (state) => {
     return {
-        storeTableData: getTableData(state)
+        storeTableData: state.issues
     }
 }
 

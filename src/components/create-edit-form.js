@@ -96,7 +96,7 @@ function CreateEditForm(props) {
 
 const mapStateToProps = (state) => {
     return {
-        chosenItem: state.issues.chosenItem
+        chosenItem: state.ui.chosenItem
     }
 }
 

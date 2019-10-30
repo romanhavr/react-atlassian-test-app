@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import '../styles/modalWindow.css';
 import { chooseItem, editIssue } from '../store/actions';
-import { getTableData } from '../store/selectors';
 import TableTree from '@atlaskit/table-tree';
 import Avatar from '@atlaskit/avatar';
 import Badge from '@atlaskit/badge';
@@ -73,8 +72,11 @@ class IssuesTable extends React.Component {
         const issue = (item) => <span onClick={() => this.itemClick(item)} className="summary">
                                     {item.issue}
                                 </span>;
-        const assignee = (item) => <span><Avatar size="xsmall" />
-                                    {userList.filter(user => user.id === item.assignee)[0].displayName}
+        const assignee = (item) => <span><Avatar
+                                            size="xsmall"
+                                            src={userList.find(user => user.id === item.assignee).avatar}
+                                        />
+                                    {userList.find(user => user.id === item.assignee).displayName}
                                 </span>;
         const labels = (item) => item.labelIds.map((id )=> {
                                     this.keyCounter++;
@@ -128,9 +130,9 @@ class IssuesTable extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        chosenItem: state.issues.chosenItem,
-        storeTableData: getTableData(state),
-        sortingBy: state.issues.sortBy
+        storeTableData: state.issues,
+        chosenItem: state.ui.chosenItem,
+        sortingBy: state.ui.sortBy
     }
 }
 
