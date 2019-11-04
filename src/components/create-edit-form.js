@@ -31,7 +31,8 @@ function CreateEditForm(props) {
                     props.chosenItem ? 
                     {
                         value: chosenUser.displayName,
-                        label: chosenUser.displayName
+                        label: chosenUser.displayName,
+                        id: chosenUser.id
                     } :
                     ''
                 }
@@ -42,7 +43,8 @@ function CreateEditForm(props) {
                     classNamePrefix="react-select"
                     options={userList.map(user => ({
                         value: user.displayName,  
-                        label: user.displayName
+                        label: user.displayName,
+                        id: user.id
                     }))}
                     isSearchable={false}
                     placeholder="Choose assignee..."
@@ -55,7 +57,8 @@ function CreateEditForm(props) {
                     props.chosenItem ? 
                     {
                         value: props.chosenItem.priority.value,
-                        label: props.chosenItem.priority.label
+                        label: props.chosenItem.priority.label,
+                        level: props.chosenItem.priority.level,
                     } :
                     ''
                 }

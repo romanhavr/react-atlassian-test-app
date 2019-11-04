@@ -1,73 +1,18 @@
-import { CHOOSE_ITEM, SORT_TABLE } from "../actionTypes";
-// import { initialIssues } from '../../common/initialIssues';
-// import { labels } from '../../common/labelList';
-// import { userList } from '../../common/userList';
+//@flow
 
-const initialState = {
-//   ...initialIssues,
+import { CHOOSE_ITEM, SORT_TABLE } from "../actionTypes";
+import type { Item, SortBy, UIState, Action }from "../../interfaces/interfaces";
+
+const initialState: UIState = {
   chosenItem: null,
   sortBy: []
 };
 
-export default function (state = initialState, action) {
+export default function (state: UIState = initialState, action: Action) {
   switch (action.type) {
 
-    // case ADD_ISSUE: {
-    //     const { data, length } = action.payload;
-    //     const newLabelIds = [];
-    //     Object.keys(data).forEach( key =>
-    //       labels.forEach(label => {
-    //         if (label.name === key && data[key].length)
-    //           newLabelIds.push(label.id)
-    //       })
-    //     );
-    //     const assigneeId = userList.filter( user => 
-    //         user.displayName === data.assignee.value
-    //       )[0].id
-    //   return {
-    //     ...state,
-    //     [length + 1]: {
-    //       id: length + 1,
-    //       content: {
-    //         id: length + 1,
-    //         issue: data.issue,
-    //         priority: data.priority,
-    //         assignee: assigneeId,
-    //         labelIds: newLabelIds
-    //       }
-    //     }
-    //   };
-    // }
-
-    // case EDIT_ISSUE: {
-    //   const { data } = action.payload;
-    //   const newLabelIds = [];
-    //   Object.keys(data).forEach( key =>
-    //     labels.forEach(label => {
-    //       if (label.name === key && data[key].length)
-    //         newLabelIds.push(label.id)
-    //     })
-    //   );
-    //   const assigneeId = userList.filter( user => 
-    //       user.displayName === data.assignee.value
-    //     )[0].id
-    //   return {
-    //     ...state,
-    //     [data.id - 1]: {
-    //       id: data.id,
-    //       content: {
-    //         id: data.id,
-    //         issue: data.issue,
-    //         priority: data.priority,
-    //         assignee: assigneeId,
-    //         labelIds: newLabelIds
-    //       }
-    //     }
-    //   };
-    // }
-
     case CHOOSE_ITEM: {
-      const { item } = action.payload;
+      const item: Item = action.payload.item;
       return {
         ...state,
         chosenItem: item
@@ -75,7 +20,7 @@ export default function (state = initialState, action) {
     }
 
     case SORT_TABLE: {
-      const { value } = action.payload;
+      const value: SortBy = action.payload.value;
       return {
         ...state,
         sortBy: value
