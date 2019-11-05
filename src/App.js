@@ -3,7 +3,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 import { connect } from 'react-redux';
-import { sortTable } from './store/actions';
+import { sortTable, userFetchReq } from './store/actions';
 import { BreadcrumbsStateless, BreadcrumbsItem } from '@atlaskit/breadcrumbs';
 import Button from '@atlaskit/button';
 import Select from '@atlaskit/select';
@@ -36,6 +36,9 @@ function App(props) {
                 Create new issue
               </Button>
             </NavLink>
+            <Button appearance="secondary" onClick={() => props.userFetchReq('SAGA Action')}>
+              Saga Action
+            </Button>
             <Select
               className="multi-select"
               classNamePrefix="react-select"
@@ -62,7 +65,8 @@ function App(props) {
 
 const mapDispatchToProps = dispatch => {
   return {
-    sortTable: value => dispatch(sortTable(value))
+    sortTable: value => dispatch(sortTable(value)),
+    userFetchReq: data => dispatch(userFetchReq(data)),
   }
 }
 

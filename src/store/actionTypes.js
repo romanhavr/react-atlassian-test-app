@@ -2,3 +2,6 @@ export const ADD_ISSUE = "ADD_ISSUE";
 export const EDIT_ISSUE = "EDIT_ISSUE";
 export const CHOOSE_ITEM = "CHOOSE_ITEM";
 export const SORT_TABLE = "SORT_TABLE";
+export const USER_FETCH_REQUESTED = "USER_FETCH_REQUESTED";
+export const USER_FETCH_SUCCEEDED = "USER_FETCH_SUCCEEDED";
+export const ASYNC_TYPE = "ASYNC_TYPE";
