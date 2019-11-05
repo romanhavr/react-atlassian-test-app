@@ -79,7 +79,7 @@ function CreateEditForm(props) {
             <Fieldset legend="Labels">
                 {labels.map( label => { return (
                     <CheckboxField
-                        name={label.name}
+                        name='labels'
                         value={label.name}
                         key={label.name}
                         defaultIsChecked={
