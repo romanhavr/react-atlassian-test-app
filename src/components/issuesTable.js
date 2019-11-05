@@ -94,7 +94,8 @@ class IssuesTable extends React.Component {
                                         </Badge>
                                     )}
                                 )                                
-        const priority = (item) => {const itemLabel = priorityList.find(priorityItem => priorityItem.level === item.priority).label;
+        const priority = (item) => {const findItemLabel = priorityList.find(priorityItem => priorityItem.level === item.priority);
+                                    const itemLabel = findItemLabel ? findItemLabel.label : null;
                                     return (<span>
                                         {priorityIcon(itemLabel)}
                                         {itemLabel}
