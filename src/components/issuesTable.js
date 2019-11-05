@@ -10,6 +10,7 @@ import Form from '@atlaskit/form';
 import CreateEditForm from './create-edit-form';
 import { userList } from '../common/userList';
 import { labels as labelList } from '../common/labelList';
+import { priorityList } from '../common/priorityList';
 import { sortingFunc } from '../common/sortingFunction';
 import PriorityMajorIcon from '@atlaskit/icon-priority/glyph/priority-major';
 import PriorityMediumIcon from '@atlaskit/icon-priority/glyph/priority-medium';
@@ -93,10 +94,11 @@ class IssuesTable extends React.Component {
                                         </Badge>
                                     )}
                                 )                                
-        const priority = (item) => <span>
-                                        {priorityIcon(item.priority.label)}
-                                        {item.priority.label}
-                                    </span>;
+        const priority = (item) => {const itemLabel = priorityList.find(priorityItem => priorityItem.level === item.priority).label;
+                                    return (<span>
+                                        {priorityIcon(itemLabel)}
+                                        {itemLabel}
+                                    </span>)};
 
         return (
             <React.Fragment>

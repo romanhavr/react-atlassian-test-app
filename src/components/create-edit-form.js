@@ -12,7 +12,11 @@ import { priorityList } from '../common/priorityList';
 function CreateEditForm(props) {
 
     const chosenUser = props.chosenItem ?
-            userList.filter(user => user.id === props.chosenItem.assignee)[0] : 
+            userList.find(user => user.id === props.chosenItem.assignee) : 
+            null;
+
+    const chosenPriority = props.chosenItem ?
+            priorityList.find(priority => priority.level === props.chosenItem.priority) : 
             null;
     
     return (
@@ -56,9 +60,9 @@ function CreateEditForm(props) {
                 defaultValue={
                     props.chosenItem ? 
                     {
-                        value: props.chosenItem.priority.value,
-                        label: props.chosenItem.priority.label,
-                        level: props.chosenItem.priority.level,
+                        value: chosenPriority.value,
+                        label: chosenPriority.label,
+                        level: chosenPriority.level,
                     } :
                     ''
                 }
