@@ -16,7 +16,7 @@ import PriorityMajorIcon from '@atlaskit/icon-priority/glyph/priority-major';
 import PriorityMediumIcon from '@atlaskit/icon-priority/glyph/priority-medium';
 import PriorityMinorIcon from '@atlaskit/icon-priority/glyph/priority-minor';
 
-class IssuesTable extends React.Component {
+export class IssuesTable extends React.Component {
 
     chooseItemClick = this.props.chooseItemClick;
     editIssue = this.props.editIssue;
@@ -94,7 +94,7 @@ class IssuesTable extends React.Component {
                                         </Badge>
                                     )}
                                 )                                
-        const priority = (item) => {const findItemLabel = priorityList.find(priorityItem => priorityItem.level === item.priority);
+        const priority = ({priority}) => {const findItemLabel = priorityList.find(({level}) => level === priority);
                                     const itemLabel = findItemLabel ? findItemLabel.label : null;
                                     return (<span>
                                         {priorityIcon(itemLabel)}

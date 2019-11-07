@@ -16,19 +16,23 @@
     "@atlaskit/textfield": "^3.1.2",
     "@reach/router": "^1.2.1",
     "flow-bin": "^0.111.1",
+    "jest-environment-enzyme": "^7.1.2",
+    "jest-enzyme": "^7.1.2",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
+    "react-test-renderer": "^16.11.0",
     "redux": "^4.0.4",
+    "redux-mock-store": "^1.5.3",
     "redux-saga": "^1.1.1",
     "styled-components": "^4.4.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "flow": "flow"
   },
@@ -46,5 +50,32 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "babel7-jest": "^1.0.1",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
+    "jest": "^24.9.0",
+    "tape": "^4.11.0"
+  },
+  "babel": {
+    "plugins": [
+      "transform-es2015-modules-commonjs",
+      "@babel/plugin-proposal-class-properties"
+    ],
+    "env": {
+      "test": {
+        "presets": [
+          "@babel/preset-env",
+          "@babel/preset-react"
+        ]
+      }
+    }
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel7-jest"
+    }
   }
 }

@@ -1,12 +1,13 @@
-import { USER_FETCH_REQUESTED, USER_FETCH_SUCCEEDED, ASYNC_TYPE } from "../actionTypes";
+import { USER_FETCH_REQUESTED, USER_FETCH_SUCCEEDED, USER_FETCH_FAILED, ASYNC_TYPE } from "../actionTypes";
 
 const initialState = {
   sagaData: null,
   sagaSucceeded: null,
+  sagaFailed: null,
   someUser: null
 };
 
-export default function (state = initialState, action) {
+export default (state = initialState, action) => {
   switch (action.type) {
 
     case USER_FETCH_REQUESTED: {
@@ -20,6 +21,13 @@ export default function (state = initialState, action) {
         return {
           ...state,
           sagaSucceeded: action.payload
+        };
+    }
+
+    case USER_FETCH_FAILED: {
+        return {
+          ...state,
+          sagaFailed: action.message
         };
     }
 

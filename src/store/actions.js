@@ -4,6 +4,7 @@ import { ADD_ISSUE,
         SORT_TABLE,
         USER_FETCH_REQUESTED,
         USER_FETCH_SUCCEEDED,
+        USER_FETCH_FAILED,
         ASYNC_TYPE
       } from "./actionTypes";
 
@@ -34,6 +35,11 @@ export const userFetchReq = data => ({
 
 export const userFetchSucceeded = data => ({
   type: USER_FETCH_SUCCEEDED,
+  payload: { data }
+})
+
+export const userFetchFailed = data => ({
+  type: USER_FETCH_FAILED,
   payload: { data }
 })
 
