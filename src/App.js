@@ -11,7 +11,7 @@ import './App.css';
 import IssuesTable from './components/issuesTable';
 import CreatePage from './components/create-page';
 
-function App(props) {
+export function App(props) {
   return (
     <div className="App">
       <Router>
@@ -32,11 +32,11 @@ function App(props) {
         <main>
           <Route exact path="/">
             <NavLink exact to="/create">
-              <Button appearance="primary" onClick={() => props.sortTable(null)}>
+              <Button appearance="primary" onClick={() => props.sortTable(null)} data-test="create-issue-button">
                 Create new issue
               </Button>
             </NavLink>
-            <Button appearance="secondary" onClick={() => props.userFetchReq('SAGA Action')}>
+            <Button appearance="secondary" onClick={() => props.userFetchReq('SAGA Action')} data-test="saga-action-button">
               Saga Action
             </Button>
             <Select

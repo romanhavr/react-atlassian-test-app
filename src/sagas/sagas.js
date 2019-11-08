@@ -12,7 +12,7 @@ function* fetchUser() {
 
 function* asyncData(user) {
     yield delay(2000);
-    yield put({ type: 'ASYNC_TYPE', user: user })
+    yield put({ type: 'ASYNC_TYPE', user })
 }
 
 function* mySaga() {

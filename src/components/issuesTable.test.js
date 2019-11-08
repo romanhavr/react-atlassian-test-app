@@ -3,6 +3,7 @@ import React from 'react';
 import { IssuesTable } from './issuesTable';
 import { initialIssues } from '../common/initialIssues';
 import { Provider } from "react-redux";
+import TableTree from '@atlaskit/table-tree';
 import configureMockStore from "redux-mock-store";
 
 const mockStore = configureMockStore();
@@ -36,6 +37,13 @@ const mountWrapper = mount(
     </Provider>
 );
 
+const sortedTableData = initialIssues.map(issue => {
+    return {
+        id: issue.id,
+        content: issue
+    }
+});
+
 describe('Issues Table testing...', () => {
 
     it('IssueTable should include TableTree (using "shallow")', () => {
@@ -44,5 +52,18 @@ describe('Issues Table testing...', () => {
 
     it('IssueTable should include spans (using "mount")', () => {
         expect(mountWrapper.find('span')).toExist();
+    })
+
+    it('IssueTable should include SNAPSHOT', () => {
+        const tree = shallow(
+        <TableTree
+                headers={['Issue', 'Assignee', 'Labels', 'Priority']}
+                columns={['issue', 'assignee', 'labels', 'priority']}
+                columnWidths={['200px', '200px', '250px', '150px']}
+                items={sortedTableData}
+            />
+            );
+        
+        expect(tree).toMatchSnapshot();
     })
 })
