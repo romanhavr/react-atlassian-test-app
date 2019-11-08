@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App component testing... App should include SNAPSHOT 1`] = `<header />`;
