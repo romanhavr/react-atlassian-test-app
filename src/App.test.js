@@ -2,6 +2,7 @@ import { shallow, mount } from 'enzyme';
 import React from 'react';
 import ConnectedApp, { App } from './App';
 import { initialIssues } from './common/initialIssues';
+import { sortTable, userFetchReq } from './store/actions'
 import { Provider } from "react-redux";
 import configureMockStore from "redux-mock-store";
 
@@ -30,8 +31,7 @@ const initialSagaStore = {
 const store = mockStore({
     issues: initialIssues,
     ui: { chosenItem },
-    saga: initialSagaStore,
-    ...initialDispatches
+    saga: initialSagaStore
 });
 
 const wrapper = mount(
@@ -82,17 +82,26 @@ describe('App Redux testing', () => {
         expect(connectedWrapper.prop('store').getState().saga).toBe(initialSagaStore)
     });
 
+    it('ConnectedApp should be rendered', () => {
+        expect(connectedWrapper.find(ConnectedApp).length).toBe(1)
+    })
     
     it('App actions should dispatch', () => {
-        console.log(connectedStore.dispatch)
-        let action;
+        let actions;
         connectedStore.dispatch(sortTable({
             label: 'Assignee',
             value: 'assignee'
         }));
         connectedStore.dispatch(userFetchReq('SAGA Action'));
-        action = connectedStore.getActions();
-        expect(action[0].type).toBe("SORT_TABLE");
-        expect(action[1].type).toBe("USER_FETCH_REQUESTED");
+        actions = connectedStore.getActions();
+        
+        expect(actions[0].type).toBe('SORT_TABLE');
+        expect(actions[0].payload.value).toEqual({
+            label: 'Assignee',
+            value: 'assignee'
+        });
+        
+        expect(actions[1].type).toBe('USER_FETCH_REQUESTED');
+        expect(actions[1].payload.data).toBe('SAGA Action');
     })
 })
