@@ -9,7 +9,7 @@ import { labels } from '../common/labelList';
 import { userList } from '../common/userList';
 import { priorityList } from '../common/priorityList';
 
-function CreateEditForm(props) {
+export function CreateEditForm(props) {
 
     const chosenUser = props.chosenItem ?
             userList.find(user => user.id === props.chosenItem.assignee) : 
@@ -52,6 +52,7 @@ function CreateEditForm(props) {
                     }))}
                     isSearchable={false}
                     placeholder="Choose assignee..."
+                    data-test="assignee-select"
                     {...fieldProps}
                 />}
             </Field>
@@ -73,6 +74,7 @@ function CreateEditForm(props) {
                     options={priorityList}
                     isSearchable={false}
                     placeholder="Choose priority..."
+                    data-test="priority-select"
                     {...fieldProps}
                 />}
             </Field>
@@ -91,6 +93,7 @@ function CreateEditForm(props) {
                         {({fieldProps}) => (
                             <Checkbox
                                 label={label.label}
+                                data-test={`label-checkboxes${label.id}`}
                                 {...fieldProps}
                             />
                         )}

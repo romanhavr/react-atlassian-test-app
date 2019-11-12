@@ -1,6 +1,6 @@
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 import React from 'react';
-import ConnectedApp, { App } from './App';
+import ConnectedApp from './App';
 import { initialIssues } from './common/initialIssues';
 import { sortTable, userFetchReq } from './store/actions'
 import { Provider } from "react-redux";
@@ -16,11 +16,6 @@ const chosenItem = {
     labelIds: [1]
 }
 
-const initialDispatches = {
-    sortTable: jest.fn(),
-    userFetchReq: jest.fn()
-}
-
 const initialSagaStore = {
     sagaData: null,
     sagaSucceeded: null,
@@ -28,49 +23,17 @@ const initialSagaStore = {
     someUser: null,
 }
 
-const store = mockStore({
+const connectedStore = mockStore({
     issues: initialIssues,
     ui: { chosenItem },
     saga: initialSagaStore
 });
 
-const wrapper = mount(
-    <Provider store={store}>
-        <App {...initialDispatches} />
-    </Provider>
-);
-
-describe('App component testing...', () => {
-
-    const creatIssueButton = wrapper.find('button[data-test="create-issue-button"]');
-    const sagaActionButton = wrapper.find('button[data-test="saga-action-button"]');
-
-    it('App should "click" Create Issue Button', () => {
-        expect(creatIssueButton.length).toBe(1);
-
-        creatIssueButton.simulate('click');
-        expect(initialDispatches.sortTable).toHaveBeenLastCalledWith(null)
-    })
-
-    it('App should "click" Saga Action Button', () => {
-        expect(sagaActionButton.length).toBe(1);
-
-        sagaActionButton.simulate('click', 'SAGA Action');
-        expect(initialDispatches.userFetchReq).toHaveBeenLastCalledWith('SAGA Action')
-    })
-
-    it('App should include SNAPSHOT', () => {
-        const tree = shallow(<header></header>);
-        expect(tree).toMatchSnapshot();
-    })
-});
-
-let connectedWrapper, connectedStore;
+let connectedWrapper;
 
 describe('App Redux testing', () => {
 
     beforeEach( () => {
-        connectedStore = store;
         connectedWrapper = mount(
             <Provider store={connectedStore}>
                 <ConnectedApp />

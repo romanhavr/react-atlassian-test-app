@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import '../styles/modalWindow.css';
-import { chooseItem, editIssue } from '../store/actions';
+import { chooseItem, editIssue, removeIssue } from '../store/actions';
 import TableTree from '@atlaskit/table-tree';
 import Avatar from '@atlaskit/avatar';
 import Badge from '@atlaskit/badge';
@@ -15,18 +15,20 @@ import { sortingFunc } from '../common/sortingFunction';
 import PriorityMajorIcon from '@atlaskit/icon-priority/glyph/priority-major';
 import PriorityMediumIcon from '@atlaskit/icon-priority/glyph/priority-medium';
 import PriorityMinorIcon from '@atlaskit/icon-priority/glyph/priority-minor';
+import TrashIcon from '@atlaskit/icon/glyph/trash';
 
 export class IssuesTable extends React.Component {
 
     chooseItemClick = this.props.chooseItemClick;
     editIssue = this.props.editIssue;
+    itemRemove = this.props.itemRemove;
     state = {
         isOpen: !!this.props.chosenItem,
         tableData: this.props.storeTableData
     };
     keyCounter = 0;
 
-    itemClick = (item) => {
+    itemClick = item => {
         this.chooseItemClick(item);
         this.setState({ isOpen: true })
     }
@@ -36,12 +38,19 @@ export class IssuesTable extends React.Component {
         this.setState({ isOpen: false })
     };
 
-    onFormSubmit = (data) => {
+    onFormSubmit = data => {
         this.editIssue({...data, id: this.props.chosenItem.id});
         setTimeout(() => this.setState({
             tableData: this.props.storeTableData
         }), 0);
         this.close();
+    }
+
+    removeItem = item => {
+        this.itemRemove(item);
+        setTimeout(() => this.setState({
+            tableData: this.props.storeTableData
+        }), 0);
     }
 
     render() {
@@ -75,16 +84,16 @@ export class IssuesTable extends React.Component {
             }
         }
 
-        const issue = (item) => <span onClick={() => this.itemClick(item)} className="summary">
+        const issue = item => <span onClick={() => this.itemClick(item)} className="summary">
                                     {item.issue}
                                 </span>;
-        const assignee = (item) => <span><Avatar
+        const assignee = ({ assignee }) => <span><Avatar
                                             size="xsmall"
-                                            src={userList.find(user => user.id === item.assignee).avatar}
+                                            src={userList.find( ({ id }) => id === assignee).avatar}
                                         />
-                                    {userList.find(user => user.id === item.assignee).displayName}
+                                    {userList.find(user => user.id === assignee).displayName}
                                 </span>;
-        const labels = (item) => item.labelIds.map((id )=> {
+        const labels = item => item.labelIds.map( id => {
                                     this.keyCounter++;
                                     return (
                                         <Badge key={this.keyCounter}>
@@ -100,13 +109,14 @@ export class IssuesTable extends React.Component {
                                         {priorityIcon(itemLabel)}
                                         {itemLabel}
                                     </span>)};
+        const removing = item => <span className="trash-icon" onClick={() => this.removeItem(item)}><TrashIcon /></span>
 
         return (
             <React.Fragment>
                 <TableTree
-                    headers={['Issue', 'Assignee', 'Labels', 'Priority']}
-                    columns={[issue, assignee, labels, priority]}
-                    columnWidths={['200px', '200px', '250px', '150px']}
+                    headers={['Issue', 'Assignee', 'Labels', 'Priority', 'Trash']}
+                    columns={[issue, assignee, labels, priority, removing]}
+                    columnWidths={['200px', '170px', '200px', '150px', '80px']}
                     items={sortedTableData}
                 />
                 <ModalTransition>
@@ -147,7 +157,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => {
     return {
         chooseItemClick: item => dispatch(chooseItem(item)),
-        editIssue: data => dispatch(editIssue(data))
+        editIssue: data => dispatch(editIssue(data)),
+        itemRemove: item => dispatch(removeIssue(item))
     }
 }
 

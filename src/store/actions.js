@@ -1,49 +1,46 @@
-import { ADD_ISSUE,
-        EDIT_ISSUE,
-        CHOOSE_ITEM,
-        SORT_TABLE,
-        USER_FETCH_REQUESTED,
-        USER_FETCH_SUCCEEDED,
-        USER_FETCH_FAILED,
-        ASYNC_TYPE
-      } from "./actionTypes";
+import * as AT from "./actionTypes";
 
 export const addIssue = (data) => ({
-  type: ADD_ISSUE,
+  type: AT.ADD_ISSUE,
   payload: { data }
 });
 
 export const editIssue = data => ({
-  type: EDIT_ISSUE,
+  type: AT.EDIT_ISSUE,
+  payload: { data }
+});
+
+export const removeIssue = data => ({
+  type: AT.REMOVE_ISSUE,
   payload: { data }
 });
 
 export const chooseItem = item => ({
-  type: CHOOSE_ITEM,
+  type: AT.CHOOSE_ITEM,
   payload: { item }
 });
 
 export const sortTable = value => ({
-  type: SORT_TABLE,
+  type: AT.SORT_TABLE,
   payload: { value }
 });
 
 export const userFetchReq = data => ({
-  type: USER_FETCH_REQUESTED,
+  type: AT.USER_FETCH_REQUESTED,
   payload: { data }
 })
 
 export const userFetchSucceeded = data => ({
-  type: USER_FETCH_SUCCEEDED,
+  type: AT.USER_FETCH_SUCCEEDED,
   payload: { data }
 })
 
 export const userFetchFailed = data => ({
-  type: USER_FETCH_FAILED,
+  type: AT.USER_FETCH_FAILED,
   payload: { data }
 })
 
 export const actionType = data => ({
-  type: ASYNC_TYPE,
+  type: AT.ASYNC_TYPE,
   payload: { data }
 })

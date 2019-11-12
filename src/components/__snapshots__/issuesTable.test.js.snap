@@ -16,14 +16,14 @@ exports[`Issues Table testing... IssueTable should include SNAPSHOT 1`] = `
     <CellWithColumnWidth
       columnIndex={1}
       key="1"
-      width="200px"
+      width="170px"
     >
       Assignee
     </CellWithColumnWidth>
     <CellWithColumnWidth
       columnIndex={2}
       key="2"
-      width="250px"
+      width="200px"
     >
       Labels
     </CellWithColumnWidth>
@@ -33,6 +33,13 @@ exports[`Issues Table testing... IssueTable should include SNAPSHOT 1`] = `
       width="150px"
     >
       Priority
+    </CellWithColumnWidth>
+    <CellWithColumnWidth
+      columnIndex={4}
+      key="4"
+      width="80px"
+    >
+      Trash
     </CellWithColumnWidth>
   </Headers>
   <Rows

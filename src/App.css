@@ -12,3 +12,12 @@ h1 {
 a {
   text-decoration: none;
 }
+
+.trash-icon {
+  color: rgb(255, 100, 100);
+  cursor: pointer
+}
+
+.trash-icon:hover {
+  color: rgb(202, 0, 0)
+}
