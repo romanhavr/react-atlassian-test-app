@@ -54,12 +54,31 @@ describe('Issues Table testing...', () => {
         expect(mountWrapper.find('span')).toExist();
     })
 
+    const form = mountWrapper.find('form');
+
+    it('IssueTable should include form (using "mount")', () => {
+        expect(form).toExist();
+
+        const onSubmitFn = jest.fn();
+        const onCloseFn = jest.fn();
+        const shallowWrapperForm = shallow(<form onSubmit={onSubmitFn} onClose={onCloseFn} />);
+        const form1 = shallowWrapperForm.find('form')
+        expect(form1).toExist();
+
+        form1.simulate('submit', chosenItem);
+        expect(onSubmitFn).toHaveBeenCalledTimes(1);
+        expect(onSubmitFn).toHaveBeenLastCalledWith(chosenItem);
+
+        form1.simulate('close');
+        expect(onCloseFn).toHaveBeenCalledTimes(1);
+      });
+
     it('IssueTable should include SNAPSHOT', () => {
         const tree = shallow(
         <TableTree
-                headers={['Issue', 'Assignee', 'Labels', 'Priority']}
-                columns={['issue', 'assignee', 'labels', 'priority']}
-                columnWidths={['200px', '200px', '250px', '150px']}
+                headers={['Issue', 'Assignee', 'Labels', 'Priority', 'Trash']}
+                columns={['issue', 'assignee', 'labels', 'priority', 'removing']}
+                columnWidths={['200px', '170px', '200px', '150px', '80px']}
                 items={sortedTableData}
             />
             );

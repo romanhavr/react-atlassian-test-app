@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Unnamed Block component testing... Unnamed Block should include SNAPSHOT 1`] = `<header />`;

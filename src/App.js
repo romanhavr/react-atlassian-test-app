@@ -1,24 +1,20 @@
 // @flow
 
 import React from 'react';
-import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import { connect } from 'react-redux';
 import { sortTable, userFetchReq } from './store/actions';
 import { BreadcrumbsStateless, BreadcrumbsItem } from '@atlaskit/breadcrumbs';
-import Button from '@atlaskit/button';
-import Select from '@atlaskit/select';
 import './App.css';
-import IssuesTable from './components/issuesTable';
 import CreatePage from './components/create-page';
+import UnnamedBlock from './components/unnamed-block';
 
 export function App(props) {
   return (
     <div className="App">
       <Router>
         <header>
-          <BreadcrumbsStateless
-            isExpanded="true"
-          >
+          <BreadcrumbsStateless isExpanded="true">
             <BreadcrumbsItem href="/" text="Some project" />
             <Route exact path="/">
               <BreadcrumbsItem href="/" text="Parent page" />
@@ -30,30 +26,7 @@ export function App(props) {
           <h1>Jira issues</h1>
         </header>
         <main>
-          <Route exact path="/">
-            <NavLink exact to="/create">
-              <Button appearance="primary" onClick={() => props.sortTable(null)} data-test="create-issue-button">
-                Create new issue
-              </Button>
-            </NavLink>
-            <Button appearance="secondary" onClick={() => props.userFetchReq('SAGA Action')} data-test="saga-action-button">
-              Saga Action
-            </Button>
-            <Select
-              className="multi-select"
-              classNamePrefix="react-select"
-              options={[
-                { label: 'Summary', value: 'issue' },
-                { label: 'Assignee', value: 'assignee' },
-                { label: 'Priority', value: 'priority' }
-              ]}
-              isMulti
-              onChange={value => props.sortTable(value)}
-              isSearchable={false}
-              placeholder="Sort by..."
-            />
-            <IssuesTable />
-          </Route>
+          <UnnamedBlock {...props} />
           <Route path="/create">
             <CreatePage />
           </Route>
