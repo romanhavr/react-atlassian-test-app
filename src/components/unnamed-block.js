@@ -6,7 +6,7 @@ import Button from '@atlaskit/button';
 import Select from '@atlaskit/select';
 import IssuesTable from './issuesTable';
 
-export function UnnamedBlock(props) {
+export function UnnamedBlock(props: any) {
     return (
         <Router>
             <Route exact path="/">

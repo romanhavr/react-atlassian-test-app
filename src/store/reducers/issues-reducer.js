@@ -3,13 +3,13 @@
 import { ADD_ISSUE, EDIT_ISSUE, REMOVE_ISSUE } from "../actionTypes";
 import { initialIssues } from '../../common/initialIssues';
 import { labels } from '../../common/labelList';
-import type { Item, Action }from "../../interfaces/interfaces";
+import type { Item, Action, Label }from "../../interfaces/interfaces";
 
-const initialState: Array<Item> = [
+const initialState: Item[] = [
   ...initialIssues
 ];
 
-export default function (state: Array<Item> = initialState, action: Action) {
+export default function (state: Item[] = initialState, action: Action) {
   switch (action.type) {
 
     case ADD_ISSUE: {
@@ -21,7 +21,10 @@ export default function (state: Array<Item> = initialState, action: Action) {
           issue: data.issue,
           priority: data.priority.level,
           assignee: data.assignee.id,
-          labelIds: labels.filter(({ name }) => data.labels.includes(name)).map(({ id }) => id)
+          labelIds /* (:number[]) */ : 
+            labels
+              .filter(({ name }) => data.labels.includes(name))
+              .map<number>(({ id }) => id)
         }
       ];
     }
@@ -34,21 +37,17 @@ export default function (state: Array<Item> = initialState, action: Action) {
         issue: data.issue,
         priority: data.priority.level,
         assignee: data.assignee.id,
-        labelIds: labels.filter( ({ name }) => data.labels.includes(name)).map( ({id}) => id)
+        labelIds: 
+          labels
+            .filter( ({ name }) => data.labels.includes(name))
+            .map<number>( ({id}) => id)
       }
       return newIssues
     }
 
     case REMOVE_ISSUE: {
       const { data } = action.payload;
-      const newIssues = state.filter( ({id}) => id !== data.id);
-      // newIssues[state.findIndex( ({ id }) => id === data.id)] = {
-      //   id: data.id,
-      //   issue: data.issue,
-      //   priority: data.priority.level,
-      //   assignee: data.assignee.id,
-      //   labelIds: labels.filter( ({ name }) => data.labels.includes(name)).map( ({id}) => id)
-      // }
+      const newIssues: Item[] = state.filter( ({id}) => id !== data.id);
       return newIssues
     }
 

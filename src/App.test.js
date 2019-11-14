@@ -7,7 +7,7 @@ import { initialIssues } from './common/initialIssues';
 import { sortTable, userFetchReq } from './store/actions'
 import { Provider } from "react-redux";
 import configureMockStore from "redux-mock-store";
-import type { Item } from './interfaces/interfaces';
+import type { Item, SagaState } from './interfaces/interfaces';
 
 const mockStore = configureMockStore();
 
@@ -15,13 +15,16 @@ const chosenItem: Item = {
     id: 1572444816584,
     issue: "1-st copy",
     priority: 1,
-    assignee: dfgh,
+    assignee: 1,
     labelIds: [1]
 }
 
-const initialSagaStore = {
+const initialSagaStore: SagaState = {
     sagaData: null,
-    sagaSucceeded: null,
+    sagaSucceeded: {
+        status: null,
+        users: []
+    },
     sagaFailed: null,
     someUser: null,
 }
@@ -29,7 +32,7 @@ const initialSagaStore = {
 const connectedStore = mockStore({
     issues: initialIssues,
     ui: { chosenItem },
-    saga: initialSagaStore
+    saga /* (:SagaState) */ : initialSagaStore
 });
 
 let connectedWrapper;
