@@ -1,5 +1,6 @@
 import { expectSaga } from 'redux-saga-test-plan';
 import mySaga from './sagas';
+import { userList } from '../common/userList';
 
 expectSaga.DEFAULT_TIMEOUT = 2500;
 
@@ -7,11 +8,14 @@ it('Testing saga for succees', () => {
     return expectSaga(mySaga)
     .put({
         type: "ASYNC_TYPE",
-        user: 'User Info'
+        userInfo: 'User Info'
     })
     .put({
         type: "USER_FETCH_SUCCEEDED",
-        payload: 'Fetch Succeeded payload'
+        payload: {
+            status: 'Fetch Succeeded payload',
+            users: userList
+        }
     })
     .dispatch({
         type: "USER_FETCH_REQUESTED" 

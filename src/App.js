@@ -9,7 +9,7 @@ import './App.css';
 import CreatePage from './components/create-page';
 import UnnamedBlock from './components/unnamed-block';
 
-export function App(props) {
+export function App(props: any) {
   return (
     <div className="App">
       <Router>

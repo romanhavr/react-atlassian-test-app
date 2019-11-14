@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 import { connect } from 'react-redux';
 import '../styles/modalWindow.css';
@@ -16,19 +18,34 @@ import PriorityMajorIcon from '@atlaskit/icon-priority/glyph/priority-major';
 import PriorityMediumIcon from '@atlaskit/icon-priority/glyph/priority-medium';
 import PriorityMinorIcon from '@atlaskit/icon-priority/glyph/priority-minor';
 import TrashIcon from '@atlaskit/icon/glyph/trash';
+import type { Item, User } from '../interfaces/interfaces';
 
-export class IssuesTable extends React.Component {
+type Props = {
+    storeTableData: Item[],
+    chosenItem: Item,
+    sortingBy: string[],
+    chooseItemClick: any,
+    editIssue: any,
+    itemRemove: any
+}
+
+type State = {
+    isOpen: boolean,
+    tableData : Item[]
+};
+
+export class IssuesTable extends React.Component<Props, State> {
 
     chooseItemClick = this.props.chooseItemClick;
     editIssue = this.props.editIssue;
     itemRemove = this.props.itemRemove;
-    state = {
+    state: State = {
         isOpen: !!this.props.chosenItem,
-        tableData: this.props.storeTableData
+        tableData : this.props.storeTableData
     };
     keyCounter = 0;
 
-    itemClick = item => {
+    itemClick = (item: Item )=> {
         this.chooseItemClick(item);
         this.setState({ isOpen: true })
     }
@@ -38,7 +55,7 @@ export class IssuesTable extends React.Component {
         this.setState({ isOpen: false })
     };
 
-    onFormSubmit = data => {
+    onFormSubmit = (data: any) => {
         this.editIssue({...data, id: this.props.chosenItem.id});
         setTimeout(() => this.setState({
             tableData: this.props.storeTableData
@@ -46,7 +63,7 @@ export class IssuesTable extends React.Component {
         this.close();
     }
 
-    removeItem = item => {
+    removeItem = (item: Item) => {
         this.itemRemove(item);
         setTimeout(() => this.setState({
             tableData: this.props.storeTableData
@@ -87,12 +104,13 @@ export class IssuesTable extends React.Component {
         const issue = item => <span onClick={() => this.itemClick(item)} className="summary">
                                     {item.issue}
                                 </span>;
-        const assignee = ({ assignee }) => <span><Avatar
-                                            size="xsmall"
-                                            src={userList.find( ({ id }) => id === assignee).avatar}
-                                        />
-                                    {userList.find(user => user.id === assignee).displayName}
-                                </span>;
+        const assignee = ({ assignee }) => { const user: ?User = userList.find( ({ id }) => id === assignee);
+                                if (user) return (<span> <Avatar
+                                                    size="xsmall"
+                                                    src={user.avatar}
+                                                />
+                                                {user.displayName}
+                                            </span>)};
         const labels = item => item.labelIds.map( id => {
                                     this.keyCounter++;
                                     return (

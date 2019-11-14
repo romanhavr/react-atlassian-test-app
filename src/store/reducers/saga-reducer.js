@@ -34,7 +34,7 @@ export default (state = initialState, action) => {
     case ASYNC_TYPE: {
         return {
           ...state,
-          someUser: action.user
+          someUser: action.userInfo
         };
     }
 

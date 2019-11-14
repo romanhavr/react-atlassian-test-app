@@ -1,4 +1,8 @@
-export const initialIssues = [
+// @flow
+
+import type { Item } from '../interfaces/interfaces';
+
+export const initialIssues: Item[] = [
   {
     id: 1572444816582,
     issue: '1-st',

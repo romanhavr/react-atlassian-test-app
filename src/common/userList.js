@@ -1,4 +1,8 @@
-export const userList = [
+// @flow
+
+import type { User } from '../interfaces/interfaces';
+
+export const userList: User[] = [
     {
         id: 1,
         displayName: 'Admin',

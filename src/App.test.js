@@ -1,3 +1,5 @@
+// @flow
+
 import { mount } from 'enzyme';
 import React from 'react';
 import ConnectedApp from './App';
@@ -5,10 +7,11 @@ import { initialIssues } from './common/initialIssues';
 import { sortTable, userFetchReq } from './store/actions'
 import { Provider } from "react-redux";
 import configureMockStore from "redux-mock-store";
+import type { Item, SagaState } from './interfaces/interfaces';
 
 const mockStore = configureMockStore();
 
-const chosenItem = {
+const chosenItem: Item = {
     id: 1572444816584,
     issue: "1-st copy",
     priority: 1,
@@ -16,9 +19,12 @@ const chosenItem = {
     labelIds: [1]
 }
 
-const initialSagaStore = {
+const initialSagaStore: SagaState = {
     sagaData: null,
-    sagaSucceeded: null,
+    sagaSucceeded: {
+        status: null,
+        users: []
+    },
     sagaFailed: null,
     someUser: null,
 }
@@ -26,7 +32,7 @@ const initialSagaStore = {
 const connectedStore = mockStore({
     issues: initialIssues,
     ui: { chosenItem },
-    saga: initialSagaStore
+    saga /* (:SagaState) */ : initialSagaStore
 });
 
 let connectedWrapper;
