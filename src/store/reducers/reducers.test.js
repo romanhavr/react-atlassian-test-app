@@ -40,7 +40,7 @@ describe('Saga Reducers', () => {
     })
 
     it('Should return state with passed "sagaData"', () => {
-        const newState = sagaReducers(undefined, { type: A.ASYNC_TYPE, user: 'Some sagaUserData' });
+        const newState = sagaReducers(undefined, { type: A.ASYNC_TYPE, userInfo: 'Some sagaUserData' });
         expect(newState.someUser).toEqual('Some sagaUserData');
     })
 })

@@ -1,3 +1,5 @@
+// @flow
+
 import { mount } from 'enzyme';
 import React from 'react';
 import ConnectedApp from './App';
@@ -5,14 +7,15 @@ import { initialIssues } from './common/initialIssues';
 import { sortTable, userFetchReq } from './store/actions'
 import { Provider } from "react-redux";
 import configureMockStore from "redux-mock-store";
+import type { Item } from './interfaces/interfaces';
 
 const mockStore = configureMockStore();
 
-const chosenItem = {
+const chosenItem: Item = {
     id: 1572444816584,
     issue: "1-st copy",
     priority: 1,
-    assignee: 1,
+    assignee: dfgh,
     labelIds: [1]
 }
 

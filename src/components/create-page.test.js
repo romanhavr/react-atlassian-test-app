@@ -67,12 +67,6 @@ describe('Issues Table testing...', () => {
         actions = connectedStore.getActions();
 
         expect(actions[0].type).toBe('ADD_ISSUE');
-        // expect(actions[0].payload.value).toEqual({
-        //     label: 'Assignee',
-        //     value: 'assignee'
-        // });
-
-        // expect(actions[1].type).toBe('USER_FETCH_REQUESTED');
-        // expect(actions[1].payload.data).toBe('SAGA Action');
+        expect(actions[0].payload.data).toEqual(chosenItem);
     })
 })
