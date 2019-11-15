@@ -1,7 +1,7 @@
 //@flow
 
 import { CHOOSE_ITEM, SORT_TABLE } from "../actionTypes";
-import type { Item, SortBy, UIState, Action }from "../../interfaces/interfaces";
+import type { Item, SortingOptions, UIState, Action }from "../../interfaces/interfaces";
 
 const initialState: UIState = {
   chosenItem: null,
@@ -20,7 +20,7 @@ export default function (state: UIState = initialState, action: Action) {
     }
 
     case SORT_TABLE: {
-      const value: SortBy = action.payload.value;
+      const value: SortingOptions = action.payload.value;
       return {
         ...state,
         sortBy: value

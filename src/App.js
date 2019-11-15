@@ -9,7 +9,12 @@ import './App.css';
 import CreatePage from './components/create-page';
 import UnnamedBlock from './components/unnamed-block';
 
-export function App(props: any) {
+type Props = {
+  sortTable: any,
+  userFetchReq: any,
+}
+
+export function App(props: Props) {
   return (
     <div className="App">
       <Router>
@@ -27,7 +32,7 @@ export function App(props: any) {
         </header>
         <main>
           <UnnamedBlock {...props} />
-          <Route path="/create">
+          <Route exact path="/create">
             <CreatePage />
           </Route>
         </main>

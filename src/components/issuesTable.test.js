@@ -1,3 +1,5 @@
+// @flow
+
 import { shallow, mount } from 'enzyme';
 import React from 'react';
 import { IssuesTable } from './issuesTable';
@@ -5,10 +7,11 @@ import { initialIssues } from '../common/initialIssues';
 import { Provider } from "react-redux";
 import TableTree from '@atlaskit/table-tree';
 import configureMockStore from "redux-mock-store";
+import type { Item, TableItem } from '../interfaces/interfaces';
 
 const mockStore = configureMockStore();
 
-const chosenItem = {
+const chosenItem: Item = {
     id: 1572444816584,
     issue: "1-st copy",
     priority: 1,
@@ -18,18 +21,19 @@ const chosenItem = {
 const initialState = {
     storeTableData: initialIssues,
     chosenItem,
-    sortBy: []
+    sortingBy: []
 }
 const initialDispatches = {
     chooseItemClick: jest.fn(),
-    editIssue: jest.fn()
+    editIssue: jest.fn(),
+    itemRemove: jest.fn()
 }
 
 const initialStateForMount = {...initialState, ...initialDispatches}
 
 const store = mockStore({ ui: { chosenItem } } );
 
-const shallowWrapper = shallow(<IssuesTable {...initialState}/>);
+const shallowWrapper = shallow(<IssuesTable {...initialStateForMount}/>);
 
 const mountWrapper = mount(
     <Provider store={store}>
@@ -37,7 +41,7 @@ const mountWrapper = mount(
     </Provider>
 );
 
-const sortedTableData = initialIssues.map(issue => {
+const sortedTableData: TableItem[] = initialIssues.map(issue => {
     return {
         id: issue.id,
         content: issue

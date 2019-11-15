@@ -1,46 +1,50 @@
-import * as AT from "./actionTypes";
+// @flow
 
-export const addIssue = (data) => ({
+import * as AT from "./actionTypes";
+import type { Item, EditFormActionData, Option, SagaSucceededData } from '../interfaces/interfaces';
+
+export const addIssue = (data: Item) => ({
   type: AT.ADD_ISSUE,
   payload: { data }
 });
 
-export const editIssue = data => ({
+export const editIssue = (data: EditFormActionData) => ({
   type: AT.EDIT_ISSUE,
   payload: { data }
 });
 
-export const removeIssue = data => ({
+export const removeIssue = (data: Item) => ({
   type: AT.REMOVE_ISSUE,
   payload: { data }
 });
 
-export const chooseItem = item => ({
+export const chooseItem = (item: Item) => ({
   type: AT.CHOOSE_ITEM,
   payload: { item }
 });
 
-export const sortTable = value => ({
+export const sortTable = (value: Option) => {console.log(value)
+  return ({
   type: AT.SORT_TABLE,
   payload: { value }
-});
+})};
 
-export const userFetchReq = data => ({
+export const userFetchReq = (data: string) => ({
   type: AT.USER_FETCH_REQUESTED,
   payload: { data }
 })
 
-export const userFetchSucceeded = data => ({
+export const userFetchSucceeded = (data: SagaSucceededData) => ({
   type: AT.USER_FETCH_SUCCEEDED,
   payload: { data }
 })
 
-export const userFetchFailed = data => ({
+export const userFetchFailed = (data: string) => ({
   type: AT.USER_FETCH_FAILED,
   payload: { data }
 })
 
-export const actionType = data => ({
+export const actionType = (data: string) => ({
   type: AT.ASYNC_TYPE,
   payload: { data }
 })

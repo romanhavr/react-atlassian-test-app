@@ -1,3 +1,5 @@
+// @flow
+
 import { expectSaga } from 'redux-saga-test-plan';
 import mySaga from './sagas';
 import { userList } from '../common/userList';

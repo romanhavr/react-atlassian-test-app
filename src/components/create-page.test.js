@@ -1,3 +1,5 @@
+// @flow
+
 import { shallow, mount } from 'enzyme';
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -5,9 +7,10 @@ import { CreatePage } from './create-page';
 import { Provider } from "react-redux";
 import { addIssue } from '../store/actions'
 import configureMockStore from "redux-mock-store";
+import type { Item } from '../interfaces/interfaces';
 
 const mockStore = configureMockStore();
-const chosenItem = {
+const chosenItem: Item = {
     id: 1572444816584,
     issue: "1-st copy",
     priority: 1,
@@ -18,10 +21,18 @@ const store = mockStore({
     ui: chosenItem
 })
 
+type Props = {
+    addIssue: any
+}
+
+const createPageProps: Props = {
+    addIssue: jest.fn()
+}
+
 const mountWrapper = mount(
     <Provider store={store}>
         <Router>
-            <CreatePage />
+            <CreatePage {...createPageProps} />
         </Router>
     </Provider>
 );
@@ -30,14 +41,6 @@ const connectedStore = mockStore({
     ui: chosenItem,
     addIssue: jest.fn()
 });
-
-const connectedWrapper = mount(
-    <Provider store={connectedStore}>
-        <Router>
-            <CreatePage />
-        </Router>
-    </Provider>
-);
 
 describe('Issues Table testing...', () => {
     const form = mountWrapper.find('form');
