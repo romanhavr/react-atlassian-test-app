@@ -31,7 +31,7 @@ export default function (state: Item[] = initialState, action: Action) {
 
     case EDIT_ISSUE: {
       const { data } = action.payload;
-      const newIssues = [...state];
+      const newIssues: Item[] = [...state];
       newIssues[state.findIndex( ({ id }) => id === data.id)] = {
         id: data.id,
         issue: data.issue,

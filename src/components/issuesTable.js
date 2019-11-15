@@ -18,12 +18,20 @@ import PriorityMajorIcon from '@atlaskit/icon-priority/glyph/priority-major';
 import PriorityMediumIcon from '@atlaskit/icon-priority/glyph/priority-medium';
 import PriorityMinorIcon from '@atlaskit/icon-priority/glyph/priority-minor';
 import TrashIcon from '@atlaskit/icon/glyph/trash';
-import type { Item, User } from '../interfaces/interfaces';
+import type { Item,
+            User,
+            Priority,
+            SortingOptions,
+            TableItem,
+            ActionButton,
+            EditFormData,
+            EditFormActionData
+        } from '../interfaces/interfaces';
 
 type Props = {
     storeTableData: Item[],
     chosenItem: Item,
-    sortingBy: string[],
+    sortingBy: SortingOptions,
     chooseItemClick: any,
     editIssue: any,
     itemRemove: any
@@ -55,7 +63,7 @@ export class IssuesTable extends React.Component<Props, State> {
         this.setState({ isOpen: false })
     };
 
-    onFormSubmit = (data: any) => {
+    onFormSubmit = (data: EditFormData) => {
         this.editIssue({...data, id: this.props.chosenItem.id});
         setTimeout(() => this.setState({
             tableData: this.props.storeTableData
@@ -71,9 +79,9 @@ export class IssuesTable extends React.Component<Props, State> {
     }
 
     render() {
-        const { isOpen } = this.state;
+        const { isOpen/*(:boolean)*/ } = this.state;
 
-        const sortedTableData = this.state.tableData.map(issue => {
+        const sortedTableData: TableItem[] = this.state.tableData.map(issue => {
             return {
                 id: issue.id,
                 content: issue
@@ -84,11 +92,11 @@ export class IssuesTable extends React.Component<Props, State> {
             sortedTableData.sort( (a, b) => sortingFunc(a, b, this.props.sortingBy, 0))
         }
 
-        const actions = [
+        const actionButtons: ActionButton[] = [
             { text: 'Save changes', type: 'submit' },
             { text: 'Cancel', onClick: this.close },
         ];
-        const priorityIcon = (priorityLabel) => {
+        const priorityIcon = (priorityLabel: ?string) => {
             switch(priorityLabel) {
                 case 'High' :
                     return <PriorityMajorIcon size="medium" />;
@@ -101,17 +109,17 @@ export class IssuesTable extends React.Component<Props, State> {
             }
         }
 
-        const issue = item => <span onClick={() => this.itemClick(item)} className="summary">
+        const issue = (item: Item) => <span onClick={() => this.itemClick(item)} className="summary">
                                     {item.issue}
                                 </span>;
-        const assignee = ({ assignee }) => { const user: ?User = userList.find( ({ id }) => id === assignee);
+        const assignee = ({ assignee }: Item) => { const user: ?User = userList.find( ({ id }) => id === assignee);
                                 if (user) return (<span> <Avatar
                                                     size="xsmall"
                                                     src={user.avatar}
                                                 />
                                                 {user.displayName}
                                             </span>)};
-        const labels = item => item.labelIds.map( id => {
+        const labels = (item: Item) => item.labelIds.map( id => {
                                     this.keyCounter++;
                                     return (
                                         <Badge key={this.keyCounter}>
@@ -121,13 +129,13 @@ export class IssuesTable extends React.Component<Props, State> {
                                         </Badge>
                                     )}
                                 )                                
-        const priority = ({priority}) => {const findItemLabel = priorityList.find(({level}) => level === priority);
-                                    const itemLabel = findItemLabel ? findItemLabel.label : null;
+        const priority = ({priority}: Item) => {const findItemLabel: ?Priority = priorityList.find(({level}) => level === priority);
+                                    const itemLabel: ?string = findItemLabel ? findItemLabel.label : null;
                                     return (<span>
                                         {priorityIcon(itemLabel)}
                                         {itemLabel}
                                     </span>)};
-        const removing = item => <span className="trash-icon" onClick={() => this.removeItem(item)}><TrashIcon /></span>
+        const removing = (item: Item) => <span className="trash-icon" onClick={() => this.removeItem(item)}><TrashIcon /></span>
 
         return (
             <React.Fragment>
@@ -140,7 +148,7 @@ export class IssuesTable extends React.Component<Props, State> {
                 <ModalTransition>
                     {isOpen && (
                         <ModalDialog
-                            actions={actions}
+                            actions={actionButtons}
                             onClose={this.close}
                             heading="Edit issue"
                             components={{
@@ -174,9 +182,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        chooseItemClick: item => dispatch(chooseItem(item)),
-        editIssue: data => dispatch(editIssue(data)),
-        itemRemove: item => dispatch(removeIssue(item))
+        chooseItemClick: (item: Item) => dispatch(chooseItem(item)),
+        editIssue: (data: EditFormActionData) => dispatch(editIssue(data)),
+        itemRemove: (item: Item) => dispatch(removeIssue(item))
     }
 }
 

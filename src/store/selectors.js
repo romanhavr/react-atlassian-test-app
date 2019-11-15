@@ -1,3 +1,5 @@
+// @flow
+
 // export const getIssuesState = store => store.issues;
 
 // export const getTableData = store => {

@@ -31,18 +31,43 @@ export type Priority = {
     value: string
 }
 
+export type EditFormData = {
+    assignee: {
+        id: number,
+        value: string,
+        label: string
+    },
+    issue: string,
+    labels: string[],
+    priority: Priority
+}
+
+export type EditFormActionData = {
+    id: number,
+    assignee: {
+        id: number,
+        value: string,
+        label: string
+    },
+    issue: string,
+    labels: string[],
+    priority: Priority
+}
+
 export type FormData = {
     id: number,
     issue: string,
     priority: number,
-    asignee: number,
+    assignee: number,
     labelIds: Array<number>
 }
 
-export type SortBy = Array<{
+export type SortingOptions = Option[];
+
+export type Option = {
     label: string,
     value: string
-}>
+}
 
 export type SortingCriteria = {
     newObj1: any,
@@ -51,7 +76,7 @@ export type SortingCriteria = {
 
 export type UIState = {
     chosenItem: Item | null,
-    sortBy: Array<SortBy>
+    sortBy: SortingOptions
 }
 
 export type SagaState = {
@@ -59,12 +84,23 @@ export type SagaState = {
     sagaSucceeded: {
         status: string | null,
         users: Array<User>
-    },
+    } | null,
     sagaFailed: string | null,
     someUser: string | null
+}
+
+export type SagaSucceededData ={
+    status: string,
+    users: User[]
 }
 
 export type Action = {
     type: string,
     payload: any
+}
+
+export type ActionButton = {
+    text: string,
+    type?: string,
+    onClick?: any
 }

@@ -1,13 +1,16 @@
-import { USER_FETCH_REQUESTED, USER_FETCH_SUCCEEDED, USER_FETCH_FAILED, ASYNC_TYPE } from "../actionTypes";
+// @flow
 
-const initialState = {
+import { USER_FETCH_REQUESTED, USER_FETCH_SUCCEEDED, USER_FETCH_FAILED, ASYNC_TYPE } from "../actionTypes";
+import type { SagaState } from '../../interfaces/interfaces';
+
+const initialState: SagaState = {
   sagaData: null,
   sagaSucceeded: null,
   sagaFailed: null,
   someUser: null
 };
 
-export default (state = initialState, action) => {
+export default (state: SagaState = initialState, action: any) => {
   switch (action.type) {
 
     case USER_FETCH_REQUESTED: {

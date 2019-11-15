@@ -5,10 +5,16 @@ import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 import Button from '@atlaskit/button';
 import Select from '@atlaskit/select';
 import IssuesTable from './issuesTable';
+import type { Item, User, Priority } from '../interfaces/interfaces';
 
-export function UnnamedBlock(props: any) {
+type Props = {
+    sortTable: any,
+    userFetchReq: any,
+}
+
+export function UnnamedBlock(props: Props) {
     return (
-        <Router>
+        // <Router>
             <Route exact path="/">
                 <NavLink exact to="/create">
                     <Button appearance="primary" onClick={() => props.sortTable(null)} data-test="create-issue-button">
@@ -34,7 +40,7 @@ export function UnnamedBlock(props: any) {
                 />
                 <IssuesTable />
             </Route>
-        </Router>
+        //  </Router> 
     );
 }
 

@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -8,12 +10,17 @@ import CreateEditForm from './create-edit-form';
 import Form from '@atlaskit/form';
 import { useHistory } from "react-router-dom";
 import '../styles/create-page.css';
+import type { FormData } from '../interfaces/interfaces';
 
-export function CreatePage(props) {
+type Props = {
+    addIssue: any
+}
+
+export function CreatePage(props: Props) {
 
     const history = useHistory();
 
-    const onFormSubmit = (data) => {
+    const onFormSubmit = (data: FormData) => {
         if (!data.assignee) return
         props.addIssue(data);
         cancel();
@@ -46,7 +53,7 @@ export function CreatePage(props) {
 
 const mapDispatchToProps = dispatch => {
     return {
-        addIssue: (data, length) => dispatch(addIssue(data, length))
+        addIssue: (data: FormData) => dispatch(addIssue(data))
     }
 }
 

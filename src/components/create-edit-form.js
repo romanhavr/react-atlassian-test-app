@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 import { connect } from 'react-redux';
 import { Field } from '@atlaskit/form';
@@ -8,14 +10,19 @@ import { Checkbox } from '@atlaskit/checkbox';
 import { labels } from '../common/labelList';
 import { userList } from '../common/userList';
 import { priorityList } from '../common/priorityList';
+import type { Item, User, Priority } from '../interfaces/interfaces';
 
-export function CreateEditForm(props) {
+type Props = {
+    chosenItem: Item
+}
 
-    const chosenUser = props.chosenItem ?
+export function CreateEditForm(props: Props) {
+
+    const chosenUser: ?User = props.chosenItem ?
             userList.find(user => user.id === props.chosenItem.assignee) : 
             null;
 
-    const chosenPriority = props.chosenItem ?
+    const chosenPriority: ?Priority = props.chosenItem ?
             priorityList.find(priority => priority.level === props.chosenItem.priority) : 
             null;
     
@@ -32,7 +39,7 @@ export function CreateEditForm(props) {
             <Field
                 name="assignee"
                 defaultValue={
-                    props.chosenItem ? 
+                    (props.chosenItem && chosenUser) ? 
                     {
                         value: chosenUser.displayName,
                         label: chosenUser.displayName,
@@ -59,7 +66,7 @@ export function CreateEditForm(props) {
             <Field
                 name="priority"
                 defaultValue={
-                    props.chosenItem ? 
+                    (props.chosenItem && chosenPriority) ? 
                     {
                         value: chosenPriority.value,
                         label: chosenPriority.label,
