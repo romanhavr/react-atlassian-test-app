@@ -7,7 +7,7 @@ import { initialIssues } from './common/initialIssues';
 import { sortTable, userFetchReq } from './store/actions'
 import { Provider } from "react-redux";
 import configureMockStore from "redux-mock-store";
-import type { Item, SagaState } from './interfaces/interfaces';
+import type { Item, SagaState, Action } from './interfaces/interfaces';
 
 const mockStore = configureMockStore();
 
@@ -56,7 +56,7 @@ describe('App Redux testing', () => {
     })
     
     it('App actions should dispatch', () => {
-        let actions;
+        let actions: Action[];
         connectedStore.dispatch(sortTable({
             label: 'Assignee',
             value: 'assignee'

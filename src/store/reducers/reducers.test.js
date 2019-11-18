@@ -1,17 +1,20 @@
+// @flow
+
 import * as A from '../actionTypes';
 import sagaReducers from './saga-reducer';
 import issuesReducers from './issues-reducer';
 import uiReducers from './ui-reducer';
 import { initialIssues } from '../../common/initialIssues';
+import type { SagaState, UIState, AddFormActionData } from '../../interfaces/interfaces';
 
-const sagaDefaultState = {
+const sagaDefaultState: SagaState = {
     sagaData: null,
     sagaSucceeded: null,
     sagaFailed: null,
     someUser: null
 }
 
-const uiDefaultState = {
+const uiDefaultState: UIState = {
     chosenItem: null,
     sortBy: []
 }
@@ -19,33 +22,33 @@ const uiDefaultState = {
 describe('Saga Reducers', () => {
 
     it('Should return default state', () => {
-        const newState = sagaReducers(undefined, {});
+        const newState: SagaState = sagaReducers(undefined, {});
         expect(newState).toEqual(sagaDefaultState);
     })
 
     it('Should return state with passed "sagaData"', () => {
-        const newState = sagaReducers(undefined, { type: A.USER_FETCH_REQUESTED, payload: { data: 'Some sagaData' } });
+        const newState: SagaState = sagaReducers(undefined, { type: A.USER_FETCH_REQUESTED, payload: { data: 'Some sagaData' } });
         expect(newState).not.toEqual(sagaDefaultState);
         expect(newState.sagaData).toEqual('Some sagaData');
     })
 
     it('Should return state with passed "sagaSucceededData"', () => {
-        const newState = sagaReducers(undefined, { type: A.USER_FETCH_SUCCEEDED, payload: 'Some sagaSucceededData' });
+        const newState: SagaState = sagaReducers(undefined, { type: A.USER_FETCH_SUCCEEDED, payload: 'Some sagaSucceededData' });
         expect(newState.sagaSucceeded).toEqual('Some sagaSucceededData');
     })
 
     it('Should return state with passed "sagaData"', () => {
-        const newState = sagaReducers(undefined, { type: A.USER_FETCH_FAILED, message: 'Some sagaFailedData' });
+        const newState: SagaState = sagaReducers(undefined, { type: A.USER_FETCH_FAILED, message: 'Some sagaFailedData' });
         expect(newState.sagaFailed).toEqual('Some sagaFailedData');
     })
 
     it('Should return state with passed "sagaData"', () => {
-        const newState = sagaReducers(undefined, { type: A.ASYNC_TYPE, userInfo: 'Some sagaUserData' });
+        const newState: SagaState = sagaReducers(undefined, { type: A.ASYNC_TYPE, userInfo: 'Some sagaUserData' });
         expect(newState.someUser).toEqual('Some sagaUserData');
     })
 })
 
-const newIssue = {
+const newIssue: AddFormActionData = {
     id: 1572444816583,
     issue: 'New Issue',
     priority: { level: 1, label: 'High', value: 'high' },
@@ -60,7 +63,7 @@ const newIssue = {
 describe('Issues Reducers', () => {
 
     it('Should return default state', () => {
-        const newState = issuesReducers(undefined, {});
+        const newState = issuesReducers(undefined, {type: '', payload: null});
         expect(newState).toEqual(initialIssues);
     })
 
@@ -86,7 +89,7 @@ describe('Issues Reducers', () => {
 describe('UI Reducers', () => {
 
     it('Should return default state', () => {
-        const newState = uiReducers(undefined, {});
+        const newState = uiReducers(undefined, {type: '', payload: null});
         expect(newState).toEqual(uiDefaultState);
     })
 
