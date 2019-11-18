@@ -31,12 +31,14 @@ export type Priority = {
     value: string
 }
 
+export type Assegnee = {
+    id: number,
+    value: string,
+    label: string
+}
+
 export type EditFormData = {
-    assignee: {
-        id: number,
-        value: string,
-        label: string
-    },
+    assignee: Assegnee,
     issue: string,
     labels: string[],
     priority: Priority
@@ -44,11 +46,7 @@ export type EditFormData = {
 
 export type EditFormActionData = {
     id: number,
-    assignee: {
-        id: number,
-        value: string,
-        label: string
-    },
+    assignee: Assegnee,
     issue: string,
     labels: string[],
     priority: Priority

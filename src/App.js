@@ -8,6 +8,7 @@ import { BreadcrumbsStateless, BreadcrumbsItem } from '@atlaskit/breadcrumbs';
 import './App.css';
 import CreatePage from './components/create-page';
 import UnnamedBlock from './components/unnamed-block';
+import Statistics from './components/statistics';
 
 type Props = {
   sortTable: any,
@@ -32,6 +33,7 @@ export function App(props: Props) {
         </header>
         <main>
           <UnnamedBlock {...props} />
+          <Statistics />
           <Route exact path="/create">
             <CreatePage />
           </Route>

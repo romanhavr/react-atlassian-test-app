@@ -23,11 +23,10 @@ export const chooseItem = (item: Item) => ({
   payload: { item }
 });
 
-export const sortTable = (value: Option) => {console.log(value)
-  return ({
+export const sortTable = (value: Option) => ({
   type: AT.SORT_TABLE,
   payload: { value }
-})};
+});
 
 export const userFetchReq = (data: string) => ({
   type: AT.USER_FETCH_REQUESTED,

@@ -3,7 +3,7 @@
 import { ADD_ISSUE, EDIT_ISSUE, REMOVE_ISSUE } from "../actionTypes";
 import { initialIssues } from '../../common/initialIssues';
 import { labels } from '../../common/labelList';
-import type { Item, Action, Label }from "../../interfaces/interfaces";
+import type { Item, Action }from "../../interfaces/interfaces";
 
 const initialState: Item[] = [
   ...initialIssues
