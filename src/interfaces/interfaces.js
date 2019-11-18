@@ -54,6 +54,16 @@ export type EditFormActionData = {
     priority: Priority
 }
 
+export type AddFormActionData = {
+    id: number,
+    issue: string,
+    priority: Priority,
+    assignee: {
+        id: number
+    },
+    labels: Label[]
+}
+
 export type FormData = {
     id: number,
     issue: string,
