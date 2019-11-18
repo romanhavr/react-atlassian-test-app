@@ -29,6 +29,8 @@ export default function (state: Item[] = initialState, action: Action) {
       ];
     }
 
+    // case EDIT_ISSUE_INLINE !!!
+
     case EDIT_ISSUE: {
       const { data } = action.payload;
       const newIssues: Item[] = [...state];

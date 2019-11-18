@@ -13,7 +13,10 @@ import { priorityList } from '../common/priorityList';
 
 type Props = {
     uniqueIssues: any,
-    // userFetchReq: any,
+    uniqueIssuesBy: any,
+    uniqueAssigneeBy: any,
+    uniqueLabelsBy: any,
+    uniquePriorityBy: any
 }
 
 export function Statistics(props: Props) {

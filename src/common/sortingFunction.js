@@ -40,7 +40,6 @@ function sortingCriteria (obj1, obj2, sortingValue: string): SortingCriteria {
                 newObj1: userById1.displayName,
                 newObj2: userById2.displayName
             };
-            break;
         case 'priority' :
             const priorityByValue1 = priorityList.find(el => el.value === obj1.value);
             const priorityByValue2 = priorityList.find(el => el.value === obj2.value);
@@ -48,7 +47,6 @@ function sortingCriteria (obj1, obj2, sortingValue: string): SortingCriteria {
                 newObj1: priorityByValue1.level,
                 newObj2: priorityByValue2.level
             };
-            break;
         default:
             return { newObj1: obj1, newObj2: obj2};
     }

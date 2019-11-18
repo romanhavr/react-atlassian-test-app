@@ -3,8 +3,12 @@
     margin: 20px auto;
 }
 
-.summary {
+.edit {
     cursor: pointer;
+}
+
+.edit:hover {
+    color: rgb(75, 75, 202);
 }
 
 span {

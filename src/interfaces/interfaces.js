@@ -82,6 +82,9 @@ export type SortingCriteria = {
     newObj2: any
 }
 
+
+export type IssuesState = Item[];
+
 export type UIState = {
     chosenItem: Item | null,
     sortBy: SortingOptions
@@ -95,6 +98,12 @@ export type SagaState = {
     } | null,
     sagaFailed: string | null,
     someUser: string | null
+}
+
+export type StoreState = {
+    issues: IssuesState,
+    ui: UIState,
+    saga: SagaState
 }
 
 export type SagaSucceededData ={
