@@ -1,7 +1,14 @@
 // @flow
 
 import * as AT from "./actionTypes";
-import type { Item, EditFormActionData, Option, SagaSucceededData } from '../interfaces/interfaces';
+import type { Item,
+  EditFormActionData,
+  EditIssueInlineActionData,
+  EditAssigneeInlineActionData,
+  EditLabelsInlineActionData,
+  EditPriorityInlineActionData,
+  Option,
+  SagaSucceededData } from '../interfaces/interfaces';
 
 export const addIssue = (data: Item) => ({
   type: AT.ADD_ISSUE,
@@ -10,6 +17,26 @@ export const addIssue = (data: Item) => ({
 
 export const editIssue = (data: EditFormActionData) => ({
   type: AT.EDIT_ISSUE,
+  payload: { data }
+});
+
+export const editIssueInline = (data: EditIssueInlineActionData) => ({
+  type: AT.EDIT_ISSUE_INLINE,
+  payload: { data }
+});
+
+export const editAssigneeInline = (data: EditAssigneeInlineActionData) => ({
+  type: AT.EDIT_ASSIGNEE_INLINE,
+  payload: { data }
+});
+
+export const editLabelsInline = (data: EditLabelsInlineActionData) => ({
+  type: AT.EDIT_LABELS_INLINE,
+  payload: { data }
+});
+
+export const editPriorityInline = (data: EditPriorityInlineActionData) => ({
+  type: AT.EDIT_PRIORITY_INLINE,
   payload: { data }
 });
 

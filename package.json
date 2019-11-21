@@ -17,10 +17,12 @@
     "@atlaskit/table-tree": "^7.1.2",
     "@atlaskit/textfield": "^3.1.2",
     "@reach/router": "^1.2.1",
+    "core-js": "^3.4.1",
     "flow-bin": "^0.111.1",
     "flow-typed": "^2.6.2",
     "jest-environment-enzyme": "^7.1.2",
     "jest-enzyme": "^7.1.2",
+    "ramda": "^0.26.1",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-redux": "^7.1.1",
@@ -81,5 +83,8 @@
     "transform": {
       "^.+\\.jsx?$": "babel7-jest"
     }
-  }
+  },
+  "setupFiles": [
+    "core-js"
+  ]
 }

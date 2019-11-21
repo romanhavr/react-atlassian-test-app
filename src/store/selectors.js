@@ -5,8 +5,20 @@ import { userList } from '../common/userList';
 import { labels } from '../common/labelList';
 import { priorityList } from '../common/priorityList';
 import type { Item, StoreState } from '../interfaces/interfaces';
+import 'core-js';
 
-export const getIssuesState = (store: StoreState): Item[] => store.issues;
+export const getIssuesState = (store: StoreState): Item[] => {
+    return store.issues};
+
+export const getTableData = createSelector(
+    getIssuesState,
+    issues => issues.map(issue => {
+            return {
+                id: issue.id,
+                content: issue
+            }
+        })
+)
 
 export const getUniqueIssues = createSelector(
     getIssuesState,

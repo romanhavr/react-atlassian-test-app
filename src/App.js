@@ -33,7 +33,9 @@ export function App(props: Props) {
         </header>
         <main>
           <UnnamedBlock {...props} />
-          <Statistics />
+          <Route exact path="/">
+            <Statistics />
+          </Route>
           <Route exact path="/create">
             <CreatePage />
           </Route>

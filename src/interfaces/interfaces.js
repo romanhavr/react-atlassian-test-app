@@ -25,6 +25,8 @@ export type Label = {
     label: string
 }
 
+export type CurrentLabel = Label | void
+
 export type Priority = {
     level: number,
     label: string,
@@ -50,6 +52,26 @@ export type EditFormActionData = {
     issue: string,
     labels: string[],
     priority: Priority
+}
+
+export type EditIssueInlineActionData = {
+    item: Item,
+    value: string
+}
+
+export type EditAssigneeInlineActionData = {
+    item: Item,
+    value: string
+}
+
+export type EditLabelsInlineActionData = {
+    item: Item,
+    value: string
+}
+
+export type EditPriorityInlineActionData = {
+    item: Item,
+    value: string
 }
 
 export type AddFormActionData = {
