@@ -17,11 +17,11 @@ export function UnnamedBlock(props: Props) {
             <NavLink exact to="/create">
                 <Button appearance="primary" onClick={() => props.sortTable(null)} data-test="create-issue-button">
                     Create new issue
-                    </Button>
+                </Button>
             </NavLink>
             <Button appearance="secondary" onClick={() => props.userFetchReq('SAGA Action')} data-test="saga-action-button">
                 Saga Action
-                </Button>
+            </Button>
             <Select
                 className="multi-select"
                 classNamePrefix="react-select"

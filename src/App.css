@@ -9,6 +9,10 @@ h1 {
   margin-bottom: 40px;
 }
 
+.react-commons-button {
+  margin-bottom: 28px;
+}
+
 a {
   text-decoration: none;
 }
