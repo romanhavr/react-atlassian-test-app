@@ -5,7 +5,11 @@ import sagaReducers from './saga-reducer';
 import issuesReducers from './issues-reducer';
 import uiReducers from './ui-reducer';
 import { initialIssues } from '../../common/initialIssues';
+import { userList } from '../../common/userList';
+import { priorityList } from '../../common/priorityList';
+import { labels } from '../../common/labelList';
 import type { SagaState, UIState, AddFormActionData } from '../../interfaces/interfaces';
+
 
 const sagaDefaultState: SagaState = {
     sagaData: null,
@@ -60,6 +64,8 @@ const newIssue: AddFormActionData = {
     ]
 }
 
+const issueForInlineEdit = {...initialIssues[0]}
+
 describe('Issues Reducers', () => {
 
     it('Should return default state', () => {
@@ -77,6 +83,54 @@ describe('Issues Reducers', () => {
         const newState = issuesReducers(undefined, { type: A.EDIT_ISSUE, payload: { data: newIssue } });
         expect(newState).not.toEqual(initialIssues);
         expect(newState[1].priority).toEqual(newIssue.priority.level);
+    })
+
+    it('Should return state with new issue for "inline edit issue"', () => {
+        const newState = issuesReducers(undefined, {
+            type: A.EDIT_ISSUE_INLINE,
+            payload: { data: {
+                item: issueForInlineEdit,
+                value: 'New Issue'
+            }} 
+        });
+        expect(newState).not.toEqual(initialIssues);
+        expect(newState[0].issue).toEqual('New Issue');
+    })
+
+    it('Should return state with new issue for "inline edit assignee"', () => {
+        const newState = issuesReducers(undefined, {
+            type: A.EDIT_ASSIGNEE_INLINE,
+            payload: { data: {
+                item: issueForInlineEdit,
+                value: userList[1]
+            }} 
+        });
+        expect(newState).not.toEqual(initialIssues);
+        expect(newState[1].assignee).toEqual(userList[1].id);
+    })
+
+    it('Should return state with new issue for "inline edit labels"', () => {
+        const newState = issuesReducers(undefined, {
+            type: A.EDIT_LABELS_INLINE,
+            payload: { data: {
+                item: issueForInlineEdit,
+                value: [labels[1]]
+            }} 
+        });
+        expect(newState).not.toEqual(initialIssues);
+        expect(newState[0].labelIds).toEqual([2]);
+    })
+
+    it('Should return state with new issue for "inline edit priority"', () => {
+        const newState = issuesReducers(undefined, {
+            type: A.EDIT_PRIORITY_INLINE,
+            payload: { data: {
+                item: issueForInlineEdit,
+                value: priorityList[2]
+            }} 
+        });
+        expect(newState).not.toEqual(initialIssues);
+        expect(newState[0].priority).toEqual(3);
     })
 
     it('Should return state without removed issue', () => {

@@ -3,8 +3,24 @@
     margin: 20px auto;
 }
 
-.summary {
+.edit {
     cursor: pointer;
+}
+
+.edit:hover {
+    color: rgb(75, 75, 202);
+}
+
+.assignee-select, .labels-select {
+    width: 180px
+}
+
+/* .labels-select {
+    width: 180px
+} */
+
+.priority-select {
+    width: 130px
 }
 
 span {

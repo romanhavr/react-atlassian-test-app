@@ -25,18 +25,22 @@ export type Label = {
     label: string
 }
 
+export type CurrentLabel = Label | void
+
 export type Priority = {
     level: number,
     label: string,
     value: string
 }
 
+export type Assegnee = {
+    id: number,
+    value: string,
+    label: string
+}
+
 export type EditFormData = {
-    assignee: {
-        id: number,
-        value: string,
-        label: string
-    },
+    assignee: Assegnee,
     issue: string,
     labels: string[],
     priority: Priority
@@ -44,14 +48,30 @@ export type EditFormData = {
 
 export type EditFormActionData = {
     id: number,
-    assignee: {
-        id: number,
-        value: string,
-        label: string
-    },
+    assignee: Assegnee,
     issue: string,
     labels: string[],
     priority: Priority
+}
+
+export type EditIssueInlineActionData = {
+    item: Item,
+    value: string
+}
+
+export type EditAssigneeInlineActionData = {
+    item: Item,
+    value: string
+}
+
+export type EditLabelsInlineActionData = {
+    item: Item,
+    value: string
+}
+
+export type EditPriorityInlineActionData = {
+    item: Item,
+    value: string
 }
 
 export type AddFormActionData = {
@@ -84,6 +104,9 @@ export type SortingCriteria = {
     newObj2: any
 }
 
+
+export type IssuesState = Item[];
+
 export type UIState = {
     chosenItem: Item | null,
     sortBy: SortingOptions
@@ -97,6 +120,12 @@ export type SagaState = {
     } | null,
     sagaFailed: string | null,
     someUser: string | null
+}
+
+export type StoreState = {
+    issues: IssuesState,
+    ui: UIState,
+    saga: SagaState
 }
 
 export type SagaSucceededData ={

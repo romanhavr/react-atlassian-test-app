@@ -1,12 +1,16 @@
 
 .App {
-  max-width: 800px;
+  max-width: 900px;
   margin: 20px auto;
 }
 
 h1 {
   margin-top: -4px;
   margin-bottom: 40px;
+}
+
+.react-commons-button {
+  margin-bottom: 28px;
 }
 
 a {

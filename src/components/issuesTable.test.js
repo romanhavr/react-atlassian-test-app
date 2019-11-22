@@ -18,14 +18,22 @@ const chosenItem: Item = {
     assignee: 1,
     labelIds: [1]
 }
+
+const tableData: TableItem[] = initialIssues.map(issue => ({id: issue.id, content: issue}))
+
 const initialState = {
     storeTableData: initialIssues,
+    tableData,
     chosenItem,
     sortingBy: []
 }
 const initialDispatches = {
     chooseItemClick: jest.fn(),
     editIssue: jest.fn(),
+    editAssigneeInline: jest.fn(),
+    editIssueInline: jest.fn(),
+    editLabelsInline: jest.fn(),
+    editPriorityInline: jest.fn(),
     itemRemove: jest.fn()
 }
 
@@ -59,6 +67,10 @@ describe('Issues Table testing...', () => {
     })
 
     const form = mountWrapper.find('form');
+    const inlineEditIssue = mountWrapper.find('[data-test="inline-edit-issue"]');
+    const inlineEditAssignee = mountWrapper.find('[data-test="inline-edit-assignee"]');
+    const inlineEditLabels = mountWrapper.find('[data-test="inline-edit-labels"]');
+    const inlineEditPriority = mountWrapper.find('[data-test="inline-edit-priority"]');
 
     it('IssueTable should include form (using "mount")', () => {
         expect(form).toExist();
@@ -88,5 +100,21 @@ describe('Issues Table testing...', () => {
             );
         
         expect(tree).toMatchSnapshot();
+    })
+
+    it('IssueTable should include inline edit elements and they should dispatch actions', () => {
+        expect(inlineEditIssue).toExist();
+        expect(inlineEditAssignee).toExist();
+        expect(inlineEditLabels).toExist();
+        expect(inlineEditPriority).toExist();
+        
+        inlineEditIssue.at(1).simulate('submit');
+        inlineEditAssignee.at(1).simulate('submit');
+        inlineEditLabels.at(1).simulate('submit');
+        inlineEditPriority.at(1).simulate('submit');
+        expect(initialDispatches.editIssueInline).toHaveBeenCalled();
+        expect(initialDispatches.editAssigneeInline).toHaveBeenCalled();
+        expect(initialDispatches.editLabelsInline).toHaveBeenCalled();
+        expect(initialDispatches.editPriorityInline).toHaveBeenCalled();
     })
 })

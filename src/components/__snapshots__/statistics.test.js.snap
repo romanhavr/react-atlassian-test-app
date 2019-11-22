@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Statistics Table testing... Statistics Table should include SNAPSHOT 1`] = `
+<styled__TableTreeContainer
+  aria-readonly={true}
+  role="treegrid"
+>
+  <Headers>
+    <CellWithColumnWidth
+      columnIndex={0}
+      key="0"
+      width="300px"
+    >
+      Number of
+    </CellWithColumnWidth>
+    <CellWithColumnWidth
+      columnIndex={1}
+      key="1"
+      width="300px"
+    >
+      Number by
+    </CellWithColumnWidth>
+    <CellWithColumnWidth
+      columnIndex={2}
+      key="2"
+      width="200px"
+    >
+      Total number
+    </CellWithColumnWidth>
+  </Headers>
+  <Rows
+    items={
+      Array [
+        Object {
+          "content": Array [
+            "Unique issues",
+            "issue",
+            5,
+          ],
+          "id": "issues",
+        },
+        Object {
+          "content": Array [
+            "Unique assignees",
+            "assignee",
+            4,
+          ],
+          "id": "assegnees",
+        },
+        Object {
+          "content": Array [
+            "Unique labels",
+            "labelIds",
+            3,
+          ],
+          "id": "labels",
+        },
+        Object {
+          "content": Array [
+            "Unique priorities",
+            "priority",
+            3,
+          ],
+          "id": "priority",
+        },
+      ]
+    }
+    render={[Function]}
+  />
+</styled__TableTreeContainer>
+`;
